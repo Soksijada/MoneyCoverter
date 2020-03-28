@@ -51,6 +51,8 @@ class ConversionViewController: UIViewController {
     private let fromCurrencyPicker = UIPickerView()
     private let toCurrencyPicker = UIPickerView()
     
+    private var allCurrencies = [Currency]()
+    
     init(conversionViewModel: ConversionViewModelProtocol) {
         self.conversionViewModel = conversionViewModel
         super.init(nibName: nil, bundle: nil)
@@ -63,6 +65,7 @@ class ConversionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
+        setUpObservables()
         addGestureRecognizer()
         createPickers()
     }
@@ -78,6 +81,22 @@ class ConversionViewController: UIViewController {
         renderConvertButton()
         renderResultLabelAndResultStackView()
         renderResultSeparator()
+    }
+    
+    private func setUpObservables() {
+        conversionViewModel.currenciesFetchinResponse
+            .subscribe(onNext: { [weak self] currenciesFetchingResponse in
+                guard let `self` = self else { return }
+                switch currenciesFetchingResponse {
+                case .success(let currencies):
+                    self.allCurrencies = currencies
+                    for a in self.allCurrencies {
+                        print("\(a.currencyCode)\n")
+                    }
+                case .error(let error):
+                    self.showOneOptionAlert(title: "Error", message: "\(error.errorMessage)", actionTitle: "OK")
+                }
+            }).disposed(by: disposeBag)
     }
     
     private func addGestureRecognizer() {

@@ -1,5 +1,5 @@
 //
-//  ConversionViewModelProtocol.swift
+//  CurrencyNetworkingProtocol.swift
 //  MoneyCoverter
 //
 //  Created by Krešimir Baković on 28/03/2020.
@@ -9,6 +9,6 @@
 import Foundation
 import RxSwift
 
-protocol ConversionViewModelProtocol {
-    var currenciesFetchinResponse: ReplaySubject<CurrenciesFetchingResponse> { get }
+protocol CurrencyNetworkingProtocol {
+    func fetchAllCurrenciesFromServer() -> Observable<CurrenciesFetchingResponse>
 }
