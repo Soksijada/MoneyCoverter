@@ -23,7 +23,8 @@ class Coordinator {
     }
     
     func startConversionViewController() {
-        let conversionViewModel = ConversionViewModel()
+        let currencyNetworking = CurrencyNetworking()
+        let conversionViewModel = ConversionViewModel(currencyNetworking: currencyNetworking)
         let conversionViewController = ConversionViewController(conversionViewModel: conversionViewModel)
         let navigationController = UINavigationController(rootViewController: conversionViewController)
         window.rootViewController = navigationController

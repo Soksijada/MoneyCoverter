@@ -12,5 +12,6 @@ target 'MoneyCoverter' do
     pod 'SnapKit', '~> 5.0.0'
     pod 'RxKeyboard'
     pod 'RxGesture'
+    pod 'RxAlamofire'
 
 end

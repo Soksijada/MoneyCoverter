@@ -10,32 +10,24 @@ import UIKit
 
 extension UIColor {
     
-    static var unpauseWhite: UIColor {
-        return UIColor(named: "unpauseWhite") ?? UIColor.fallbackColor("unpauseWhite")
+    static var myWhite: UIColor {
+        return UIColor(named: "myWhite") ?? UIColor.fallbackColor("myWhite")
     }
     
-    static var unpauseBlack: UIColor {
-        return UIColor(named: "unpauseBlack") ?? UIColor.fallbackColor("unpauseBlack")
+    static var myBlack: UIColor {
+        return UIColor(named: "myBlack") ?? UIColor.fallbackColor("myBlack")
     }
     
-    static var unpauseOrange: UIColor {
-        return UIColor(named: "unpauseOrange") ?? UIColor.fallbackColor("unpauseOrange")
+    static var myDarkGray: UIColor {
+        return UIColor(named: "myDarkGray") ?? UIColor.fallbackColor("myDarkGray")
     }
     
-    static var unpauseDarkGray: UIColor {
-        return UIColor(named: "unpauseDarkGray") ?? UIColor.fallbackColor("unpauseDarkGray")
+    static var myLightGray: UIColor {
+        return UIColor(named: "myLightGray") ?? UIColor.fallbackColor("myLightGray")
     }
     
-    static var unpauseLightGray: UIColor {
-        return UIColor(named: "unpauseLightGray") ?? UIColor.fallbackColor("unpauseLightGray")
-    }
-    
-    static var unpauseGray: UIColor {
-        return UIColor(named: "unpauseGray") ?? UIColor.fallbackColor("unpauseGray")
-    }
-    
-    static var unpauseIndicatorGray: UIColor {
-        return UIColor(named: "unpauseIndicatorGray") ?? UIColor.fallbackColor("unpauseIndicatorGray")
+    static var myGray: UIColor {
+        return UIColor(named: "myGray") ?? UIColor.fallbackColor("myGray")
     }
     
     static func fallbackColor(_ forColor: String) -> UIColor {

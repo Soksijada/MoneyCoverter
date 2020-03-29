@@ -7,7 +7,14 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol ConversionViewModelProtocol {
+    var currenciesFetchinResponse: ReplaySubject<CurrenciesFetchingResponse> { get }
+    var textInFromCurrencyTextFieldChanges: PublishSubject<String?> { get }
+    var textInToCurrencyTextFieldChanges: PublishSubject<String?> { get }
+    var textInAmountTextFieldChanges: PublishSubject<String?> { get }
+    var convertButtonTouched: PublishSubject<Void> { get }
     
+    var conversionResult: Observable<ConversionResponse>! { get }
 }
