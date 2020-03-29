@@ -26,7 +26,7 @@ class ConversionViewModel: ConversionViewModelProtocol {
     var textInAmountTextFieldChanges = PublishSubject<String?>()
     var convertButtonTouched = PublishSubject<Void>()
     
-    var conversionResult: Observable<Double>!
+    var conversionResult: Observable<ConversionResponse>!
     
     init(currencyNetworking: CurrencyNetworkingProtocol) {
         self.currencyNetworking = currencyNetworking
@@ -66,13 +66,15 @@ class ConversionViewModel: ConversionViewModelProtocol {
             }).disposed(by: disposeBag)
         
         conversionResult = convertButtonTouched
-            .flatMapLatest({ [weak self] _ -> Observable<Double> in
-                guard let `self` = self else { return Observable.empty() }
-                guard let fromCurrency = self.fromCurrency,
+            .flatMapLatest({ [weak self] _ -> Observable<ConversionResponse> in
+                guard let `self` = self,
+                    let fromCurrency = self.fromCurrency,
                     let toCurrency = self.toCurrency,
-                    let amount = self.amount else { return Observable.just(1.0)}
+                    let amount = self.amount else {
+                        return Observable.just(ConversionResponse.error(.emptyFieldsError))
+                }
                 let result = self.convertCurrency(fromCurrency: fromCurrency, toCurrency: toCurrency, amount: amount)
-                return Observable.just(result)
+                return Observable.just(ConversionResponse.success(result))
             })
     }
     

@@ -16,5 +16,5 @@ protocol ConversionViewModelProtocol {
     var textInAmountTextFieldChanges: PublishSubject<String?> { get }
     var convertButtonTouched: PublishSubject<Void> { get }
     
-    var conversionResult: Observable<Double>! { get }
+    var conversionResult: Observable<ConversionResponse>! { get }
 }

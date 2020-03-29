@@ -119,12 +119,18 @@ class ConversionViewController: UIViewController {
             .disposed(by: disposeBag)
         
         conversionViewModel.conversionResult
-            .subscribe(onNext: { [weak self] result in
+            .subscribe(onNext: { [weak self] conversionResponse in
                 guard let `self` = self else { return }
-                MoneyConverterActivityIndicatorView.shared.dissmis(from: self.view)
-                self.fromResultCurrencyLabel.text = "\(self.amountTextField.text ?? "") \(self.fromCurrenyTextField.text ?? "")"
-                self.toResultCurrencyLabel.text = "\(result) \(self.toCurrencyTextField.text ?? "")"
-                self.resultStackView.isHidden = false
+                switch conversionResponse {
+                case .success(let result):
+                    MoneyConverterActivityIndicatorView.shared.dissmis(from: self.view)
+                    self.fromResultCurrencyLabel.text = "\(self.amountTextField.text ?? "") \(self.fromCurrenyTextField.text ?? "")"
+                    self.toResultCurrencyLabel.text = "\(result) \(self.toCurrencyTextField.text ?? "")"
+                    self.resultStackView.isHidden = false
+                case .error(let error):
+                    MoneyConverterActivityIndicatorView.shared.dissmis(from: self.view)
+                    self.showOneOptionAlert(title: "Error", message: "\(error.errorMessage)", actionTitle: "OK")
+                }
             }).disposed(by: disposeBag)
     }
     
@@ -144,7 +150,7 @@ class ConversionViewController: UIViewController {
         picker.delegate = self
         picker.dataSource = self
         textField.inputView = picker
-        picker.backgroundColor = UIColor.white
+        picker.backgroundColor = UIColor.myWhite
         addBarOnTopOfPicker(for: textField)
     }
     
@@ -176,7 +182,7 @@ class ConversionViewController: UIViewController {
 // MARK: - UI rendering
 private extension ConversionViewController {
     func configureScrollViewAndContainerView() {
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.myWhite
         
         view.addSubview(scrollView)
         
@@ -284,6 +290,7 @@ private extension ConversionViewController {
         }
         amountTextField.placeholder = "100"
         amountTextField.keyboardType = .decimalPad
+        amountTextField.textAlignment = .center
         
         containerView.addSubview(amountTextFieldSeparator)
         
