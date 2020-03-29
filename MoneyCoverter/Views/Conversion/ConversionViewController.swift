@@ -90,12 +90,38 @@ class ConversionViewController: UIViewController {
                 switch currenciesFetchingResponse {
                 case .success(let currencies):
                     self.allCurrencies = currencies
-                    for a in self.allCurrencies {
-                        print("\(a.currencyCode)\n")
-                    }
                 case .error(let error):
                     self.showOneOptionAlert(title: "Error", message: "\(error.errorMessage)", actionTitle: "OK")
                 }
+            }).disposed(by: disposeBag)
+        
+        fromCurrenyTextField.rx.text
+            .bind(to: conversionViewModel.textInFromCurrencyTextFieldChanges)
+            .disposed(by: disposeBag)
+        
+        toCurrencyTextField.rx.text
+            .bind(to: conversionViewModel.textInToCurrencyTextFieldChanges)
+            .disposed(by: disposeBag)
+        
+        amountTextField.rx.text
+            .bind(to: conversionViewModel.textInAmountTextFieldChanges)
+            .disposed(by: disposeBag)
+        
+        convertButton.rx.tap
+            .do(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                MoneyConverterActivityIndicatorView.shared.show(on: self.view)
+            })
+            .bind(to: conversionViewModel.convertButtonTouched)
+            .disposed(by: disposeBag)
+        
+        conversionViewModel.conversionResult
+            .subscribe(onNext: { [weak self] result in
+                guard let `self` = self else { return }
+                MoneyConverterActivityIndicatorView.shared.dissmis(from: self.view)
+                self.fromResultCurrencyLabel.text = "\(self.amountTextField.text ?? "") \(self.fromCurrenyTextField.text ?? "")"
+                self.toResultCurrencyLabel.text = "\(result) \(self.toCurrencyTextField.text ?? "")"
+                self.resultStackView.isHidden = false
             }).disposed(by: disposeBag)
     }
     
@@ -174,7 +200,7 @@ private extension ConversionViewController {
             make.height.equalTo(100)
             make.width.equalTo(100)
         }
-        moneyImageView.image = UIImage(named: "coinsIcon1024-2")
+        moneyImageView.image = UIImage(named: "coinsIcon")
     }
     
     func configureCurrenciesStackView() {
@@ -204,14 +230,8 @@ private extension ConversionViewController {
         
         fromCurrencyStackView.addArrangedSubview(fromCurrenyTextField)
         fromCurrenyTextField.placeholder = "USD"
-        
-        fromCurrencyStackView.addArrangedSubview(fromCurrencySeparator)
-        
-        fromCurrencySeparator.snp.makeConstraints { make in
-            make.width.equalTo(70)
-            make.height.equalTo(1)
-        }
-        fromCurrencySeparator.backgroundColor = .gray
+        fromCurrenyTextField.borderStyle = .roundedRect
+        fromCurrenyTextField.textAlignment = .center
     }
     
     func renderArrowsImageView() {
@@ -222,7 +242,7 @@ private extension ConversionViewController {
             make.width.equalTo(50)
             make.centerX.equalToSuperview()
         }
-        arrowsImageView.image = UIImage(named: "arrows-2")
+        arrowsImageView.image = UIImage(named: "arrows")
     }
     
     func renderToLabelAndToTextField() {
@@ -239,14 +259,8 @@ private extension ConversionViewController {
         
         toCurrencyStackView.addArrangedSubview(toCurrencyTextField)
         toCurrencyTextField.placeholder = "EUR"
-        
-        toCurrencyStackView.addArrangedSubview(toCurrencySeparator)
-        
-        toCurrencySeparator.snp.makeConstraints { make in
-            make.width.equalTo(70)
-            make.height.equalTo(1)
-        }
-        toCurrencySeparator.backgroundColor = .gray
+        toCurrencyTextField.borderStyle = .roundedRect
+        toCurrencyTextField.textAlignment = .center
     }
     
     func renderAmountLabelAndAmountTextField() {
@@ -273,7 +287,7 @@ private extension ConversionViewController {
         amountTextFieldSeparator.snp.makeConstraints { make in
             make.top.equalTo(amountTextField.snp.bottom).offset(7)
             make.centerX.equalToSuperview()
-            make.width.equalTo(80)
+            make.width.equalTo(120)
             make.height.equalTo(1)
         }
         amountTextFieldSeparator.backgroundColor = .gray
@@ -311,17 +325,14 @@ private extension ConversionViewController {
         }
         resultStackView.axis = .horizontal
         resultStackView.alignment = .center
-        resultStackView.distribution = .equalCentering
-        resultStackView.spacing = 50
+        resultStackView.distribution = .equalSpacing
+        resultStackView.spacing = 10
         resultStackView.isHidden = true
         
         resultStackView.addArrangedSubview(fromResultCurrencyLabel)
         fromResultCurrencyLabel.text = "\(amountTextField.text ?? "") \(fromCurrenyTextField.text ?? "")"
         
         resultStackView.addArrangedSubview(equalLabel)
-        equalLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-        }
         equalLabel.text = "="
         equalLabel.font = equalLabel.font.withSize(20)
         
@@ -344,12 +355,25 @@ private extension ConversionViewController {
     }
 }
 
+// MARK: - UIPickerView delegate
 extension ConversionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1
+        return allCurrencies.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return allCurrencies[row].currencyCode
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == fromCurrenyTextField.inputView {
+            fromCurrenyTextField.text = "\(allCurrencies[row].currencyCode)"
+        } else if pickerView == toCurrencyTextField.inputView {
+            toCurrencyTextField.text = "\(allCurrencies[row].currencyCode)"
+        }
     }
 }

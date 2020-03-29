@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		60E589D510D0A7A89BF5C1E3 /* Pods_MoneyCoverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8567EC3864CFD98E866586 /* Pods_MoneyCoverter.framework */; };
+		C101FE842430A6EA0049B9C3 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C101FE7B2430A6EA0049B9C3 /* PaddedTextField.swift */; };
+		C101FE872430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C101FE802430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift */; };
 		C1C7AF93242F6E9100C072AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C7AF92242F6E9100C072AC /* AppDelegate.swift */; };
 		C1C7AF9C242F6E9300C072AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1C7AF9B242F6E9300C072AC /* Assets.xcassets */; };
 		C1C7AF9F242F6E9300C072AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1C7AF9D242F6E9300C072AC /* LaunchScreen.storyboard */; };
@@ -47,6 +49,8 @@
 		6AA9E96981F9727D3238D193 /* Pods-MoneyCoverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyCoverter.debug.xcconfig"; path = "Target Support Files/Pods-MoneyCoverter/Pods-MoneyCoverter.debug.xcconfig"; sourceTree = "<group>"; };
 		83FB1F7801CD09685E19D02F /* Pods-MoneyCoverter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyCoverter.release.xcconfig"; path = "Target Support Files/Pods-MoneyCoverter/Pods-MoneyCoverter.release.xcconfig"; sourceTree = "<group>"; };
 		8F8567EC3864CFD98E866586 /* Pods_MoneyCoverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoneyCoverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C101FE7B2430A6EA0049B9C3 /* PaddedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		C101FE802430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyConverterActivityIndicatorView.swift; sourceTree = "<group>"; };
 		C1C7AF8F242F6E9100C072AC /* MoneyCoverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyCoverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C7AF92242F6E9100C072AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1C7AF9B242F6E9300C072AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +117,49 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C101FE772430A41F0049B9C3 /* Currency */ = {
+			isa = PBXGroup;
+			children = (
+				C1C7B009242FC00B00C072AC /* Currency.swift */,
+				C1C7B00F242FD5DF00C072AC /* CurrenciesFetchingResponse.swift */,
+			);
+			path = Currency;
+			sourceTree = "<group>";
+		};
+		C101FE782430A4430049B9C3 /* Currency */ = {
+			isa = PBXGroup;
+			children = (
+				C1C7B00B242FC22400C072AC /* CurrencyNetworkingProtocol.swift */,
+				C1C7B00D242FC24900C072AC /* CurrencyNetworking.swift */,
+			);
+			path = Currency;
+			sourceTree = "<group>";
+		};
+		C101FE792430A6EA0049B9C3 /* CustomUIElements */ = {
+			isa = PBXGroup;
+			children = (
+				C101FE7A2430A6EA0049B9C3 /* UITextFields */,
+				C101FE7F2430A6EA0049B9C3 /* UIActivityIndicatorViews */,
+			);
+			path = CustomUIElements;
+			sourceTree = "<group>";
+		};
+		C101FE7A2430A6EA0049B9C3 /* UITextFields */ = {
+			isa = PBXGroup;
+			children = (
+				C101FE7B2430A6EA0049B9C3 /* PaddedTextField.swift */,
+			);
+			path = UITextFields;
+			sourceTree = "<group>";
+		};
+		C101FE7F2430A6EA0049B9C3 /* UIActivityIndicatorViews */ = {
+			isa = PBXGroup;
+			children = (
+				C101FE802430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift */,
+			);
+			path = UIActivityIndicatorViews;
+			sourceTree = "<group>";
+		};
 		C1C7AF86242F6E9100C072AC = {
 			isa = PBXGroup;
 			children = (
@@ -168,9 +215,8 @@
 		C1C7AFAA242F6FCD00C072AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C1C7B009242FC00B00C072AC /* Currency.swift */,
+				C101FE772430A41F0049B9C3 /* Currency */,
 				C1C7AFAB242F6FCD00C072AC /* Errors */,
-				C1C7B00F242FD5DF00C072AC /* CurrenciesFetchingResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,8 +232,7 @@
 		C1C7AFB1242F6FCD00C072AC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				C1C7B00B242FC22400C072AC /* CurrencyNetworkingProtocol.swift */,
-				C1C7B00D242FC24900C072AC /* CurrencyNetworking.swift */,
+				C101FE782430A4430049B9C3 /* Currency */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -219,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				C1C7B008242F72B800C072AC /* Conversion */,
+				C101FE792430A6EA0049B9C3 /* CustomUIElements */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -413,6 +459,7 @@
 				C1C7B007242F727700C072AC /* ConversionViewModelProtocol.swift in Sources */,
 				C1C7AFF1242F6FFC00C072AC /* Thread+Extension.swift in Sources */,
 				C1C7AFFD242F6FFC00C072AC /* UITextField+Extension.swift in Sources */,
+				C101FE872430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift in Sources */,
 				C1C7AFA9242F6F3100C072AC /* Coordinator.swift in Sources */,
 				C1C7AFEE242F6FFC00C072AC /* UIFont+Extension.swift in Sources */,
 				C1C7AF93242F6E9100C072AC /* AppDelegate.swift in Sources */,
@@ -433,6 +480,7 @@
 				C1C7B002242F70E600C072AC /* ConversionViewController.swift in Sources */,
 				C1C7B004242F713300C072AC /* ConversionViewModel.swift in Sources */,
 				C1C7B00E242FC24900C072AC /* CurrencyNetworking.swift in Sources */,
+				C101FE842430A6EA0049B9C3 /* PaddedTextField.swift in Sources */,
 				C1C7AFED242F6FFC00C072AC /* UIImageView+Extension.swift in Sources */,
 				C1C7AFFC242F6FFC00C072AC /* CGSize+Extension.swift in Sources */,
 				C1C7AFF3242F6FFC00C072AC /* ObservableType+Extension.swift in Sources */,
