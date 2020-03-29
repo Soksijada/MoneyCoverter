@@ -247,7 +247,7 @@ private extension ConversionViewController {
     func renderArrowsImageView() {
         currenciesStackView.addArrangedSubview(arrowsImageView)
         
-        arrowsButton.snp.makeConstraints { make in
+        arrowsImageView.snp.makeConstraints { make in
             make.height.equalTo(50)
             make.width.equalTo(50)
             make.centerX.equalToSuperview()
