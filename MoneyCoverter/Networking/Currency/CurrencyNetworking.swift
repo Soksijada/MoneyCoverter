@@ -13,11 +13,11 @@ import RxAlamofire
 
 class CurrencyNetworking: CurrencyNetworkingProtocol {
     
-    private let serverURL = URL(fileURLWithPath: "http://hnbex.eu/api/v1/rates/daily")
+    private let serverURL = "http://hnbex.eu/api/v1/rates/daily"
     
     func fetchAllCurrenciesFromServer() -> Observable<CurrenciesFetchingResponse> {
         return RxAlamofire.request(.get,
-                                   "http://hnbex.eu/api/v1/rates/daily",
+                                   serverURL,
                                    parameters: nil,
                                    encoding: JSONEncoding.default)
             .validate()

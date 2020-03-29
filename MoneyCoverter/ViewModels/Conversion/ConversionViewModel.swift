@@ -15,6 +15,7 @@ class ConversionViewModel: ConversionViewModelProtocol {
     private let disposeBag = DisposeBag()
     
     private var amount: Double?
+    private var mainCurrency = Currency(currencyCode: "HRK", unitValue: 1, buyingRate: "1", medianRate: "1", sellingRate: "1")
     private var fromCurrency: Currency?
     private var toCurrency: Currency?
     private var allCurrencies = [Currency]()
@@ -39,6 +40,7 @@ class ConversionViewModel: ConversionViewModelProtocol {
                 switch currenciesFetchingResponse {
                 case .success(let currencies):
                     self.allCurrencies = currencies
+                    self.allCurrencies.insert(self.mainCurrency, at: 0)
                 case .error(let error):
                     print("ERROR: \(error.errorMessage)")
                 }

@@ -52,6 +52,7 @@ class ConversionViewController: UIViewController {
     private let toCurrencyPicker = UIPickerView()
     
     private var allCurrencies = [Currency]()
+    private var mainCurrency = Currency(currencyCode: "HRK", unitValue: 1, buyingRate: "1", medianRate: "1", sellingRate: "1")
     
     init(conversionViewModel: ConversionViewModelProtocol) {
         self.conversionViewModel = conversionViewModel
@@ -90,6 +91,7 @@ class ConversionViewController: UIViewController {
                 switch currenciesFetchingResponse {
                 case .success(let currencies):
                     self.allCurrencies = currencies
+                    self.allCurrencies.insert(self.mainCurrency, at: 0)
                 case .error(let error):
                     self.showOneOptionAlert(title: "Error", message: "\(error.errorMessage)", actionTitle: "OK")
                 }
@@ -110,6 +112,7 @@ class ConversionViewController: UIViewController {
         convertButton.rx.tap
             .do(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
+                self.view.endEditing(true)
                 MoneyConverterActivityIndicatorView.shared.show(on: self.view)
             })
             .bind(to: conversionViewModel.convertButtonTouched)

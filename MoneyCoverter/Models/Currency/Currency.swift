@@ -15,6 +15,14 @@ class Currency: Codable {
     var medianRate: String
     var sellingRate: String
     
+    init(currencyCode: String, unitValue: Int, buyingRate: String, medianRate: String, sellingRate: String) {
+        self.currencyCode = currencyCode
+        self.unitValue = unitValue
+        self.buyingRate = buyingRate
+        self.medianRate = medianRate
+        self.sellingRate = sellingRate
+    }
+    
     enum CodingKeys: String, CodingKey {
         case currencyCode = "currency_code"
         case unitValue = "unit_value"
