@@ -123,9 +123,10 @@ class ConversionViewController: UIViewController {
                 guard let `self` = self else { return }
                 switch conversionResponse {
                 case .success(let result):
+                    let formatedResult = Formatter.shared.replaceAllDotsWithCommas(in: String(result))
                     MoneyConverterActivityIndicatorView.shared.dissmis(from: self.view)
                     self.fromResultCurrencyLabel.text = "\(self.amountTextField.text ?? "") \(self.fromCurrenyTextField.text ?? "")"
-                    self.toResultCurrencyLabel.text = "\(result) \(self.toCurrencyTextField.text ?? "")"
+                    self.toResultCurrencyLabel.text = "\(formatedResult) \(self.toCurrencyTextField.text ?? "")"
                     self.resultStackView.isHidden = false
                 case .error(let error):
                     MoneyConverterActivityIndicatorView.shared.dissmis(from: self.view)
@@ -246,7 +247,7 @@ private extension ConversionViewController {
     func renderArrowsImageView() {
         currenciesStackView.addArrangedSubview(arrowsImageView)
         
-        arrowsImageView.snp.makeConstraints { make in
+        arrowsButton.snp.makeConstraints { make in
             make.height.equalTo(50)
             make.width.equalTo(50)
             make.centerX.equalToSuperview()
@@ -291,13 +292,14 @@ private extension ConversionViewController {
         amountTextField.placeholder = "100"
         amountTextField.keyboardType = .decimalPad
         amountTextField.textAlignment = .center
+        amountTextField.font = amountTextField.font?.withSize(25)
         
         containerView.addSubview(amountTextFieldSeparator)
         
         amountTextFieldSeparator.snp.makeConstraints { make in
             make.top.equalTo(amountTextField.snp.bottom).offset(7)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(120)
+            make.left.equalToSuperview().offset(50)
+            make.right.equalToSuperview().inset(50)
             make.height.equalTo(1)
         }
         amountTextFieldSeparator.backgroundColor = .gray

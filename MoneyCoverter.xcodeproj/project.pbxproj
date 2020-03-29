@@ -12,6 +12,7 @@
 		C101FE872430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C101FE802430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift */; };
 		C1724DAC2430F456008F46F9 /* ConversionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1724DAB2430F456008F46F9 /* ConversionResponse.swift */; };
 		C1724DAE2430F69F008F46F9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1724DAD2430F69F008F46F9 /* Colors.xcassets */; };
+		C1724DB1243104DB008F46F9 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1724DB0243104DB008F46F9 /* Formatter.swift */; };
 		C1C7AF93242F6E9100C072AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C7AF92242F6E9100C072AC /* AppDelegate.swift */; };
 		C1C7AF9C242F6E9300C072AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1C7AF9B242F6E9300C072AC /* Assets.xcassets */; };
 		C1C7AF9F242F6E9300C072AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1C7AF9D242F6E9300C072AC /* LaunchScreen.storyboard */; };
@@ -55,6 +56,7 @@
 		C101FE802430A6EA0049B9C3 /* MoneyConverterActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoneyConverterActivityIndicatorView.swift; sourceTree = "<group>"; };
 		C1724DAB2430F456008F46F9 /* ConversionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionResponse.swift; sourceTree = "<group>"; };
 		C1724DAD2430F69F008F46F9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		C1724DB0243104DB008F46F9 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		C1C7AF8F242F6E9100C072AC /* MoneyCoverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyCoverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C7AF92242F6E9100C072AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1C7AF9B242F6E9300C072AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -172,6 +174,14 @@
 			path = Conversion;
 			sourceTree = "<group>";
 		};
+		C1724DAF243104C7008F46F9 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				C1724DB0243104DB008F46F9 /* Formatter.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
 		C1C7AF86242F6E9100C072AC = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +264,7 @@
 		C1C7AFB8242F6FCD00C072AC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C1724DAF243104C7008F46F9 /* Formatters */,
 				C1C7AFBC242F6FCD00C072AC /* Factories */,
 			);
 			path = Services;
@@ -484,6 +495,7 @@
 				C1724DAC2430F456008F46F9 /* ConversionResponse.swift in Sources */,
 				C1C7B00A242FC00B00C072AC /* Currency.swift in Sources */,
 				C1C7AFFA242F6FFC00C072AC /* MKPolygon+Extension.swift in Sources */,
+				C1724DB1243104DB008F46F9 /* Formatter.swift in Sources */,
 				C1C7AFF0242F6FFC00C072AC /* UILabel+Extension.swift in Sources */,
 				C1C7AFFF242F6FFC00C072AC /* CGFloat+Extension.swift in Sources */,
 				C1C7AFF5242F6FFC00C072AC /* UIImage+Extension.swift in Sources */,

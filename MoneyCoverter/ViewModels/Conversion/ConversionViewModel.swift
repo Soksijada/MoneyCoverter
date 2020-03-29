@@ -62,7 +62,8 @@ class ConversionViewModel: ConversionViewModelProtocol {
             .subscribe(onNext: { [weak self] newText in
                 guard let `self` = self,
                     let amountString = newText else { return }
-                self.amount = Double(amountString)
+                let amountWithDot = Formatter.shared.replaceAllCommasWithDots(in: amountString)
+                self.amount = Double(amountWithDot)
             }).disposed(by: disposeBag)
         
         conversionResult = convertButtonTouched
